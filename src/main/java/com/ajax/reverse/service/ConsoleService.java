@@ -31,8 +31,8 @@ public class ConsoleService extends Thread implements ApplicationEventPublisherA
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("Console is closed");
         }
+        System.out.println("Console is closed");
     }
 
     @Override
