@@ -1,6 +1,7 @@
 package com.ajax.reverse.listener;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 
 import org.directwebremoting.ScriptBuffer;
@@ -13,20 +14,31 @@ import org.springframework.stereotype.Component;
 import com.ajax.reverse.event.MessageEvent;
 
 @Component
-public class MessageEventListener implements ApplicationListener<MessageEvent>{
+public class MessageEventListener implements ApplicationListener<MessageEvent> {
+
+    private Collection<ScriptSession> sessionsByPage = new HashSet<ScriptSession>();
 
     public void onApplicationEvent(MessageEvent event) {
         WebContext webContext = WebContextFactory.get();
-        String currentPage = webContext.getCurrentPage();
-        
+
         ScriptBuffer scriptBuffer = new ScriptBuffer();
         scriptBuffer.appendCall("showMessage", event.getMessage());
-        
-        Collection<ScriptSession> sessionsByPage = webContext.getScriptSessionsByPage(currentPage);
-        for (Iterator<ScriptSession> iterator = sessionsByPage.iterator(); iterator.hasNext(); ) {
+
+        if (webContext != null) {
+            String currentPage = webContext.getCurrentPage();
+
+            sessionsByPage = webContext.getScriptSessionsByPage(currentPage);
+            broadcastMessage(scriptBuffer);
+        } else {
+            broadcastMessage(scriptBuffer);
+        }
+    }
+
+    private void broadcastMessage(ScriptBuffer scriptBuffer) {
+        for (Iterator<ScriptSession> iterator = sessionsByPage.iterator(); iterator.hasNext();) {
             ScriptSession session = (ScriptSession) iterator.next();
             session.addScript(scriptBuffer);
-        }        
+        }
     }
 
 }
