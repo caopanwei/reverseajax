@@ -13,4 +13,13 @@
 	<dwr:annotation-config />
 	<dwr:configuration />
 
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongo" ref="mongo" />
+		<constructor-arg name="databaseName" value="reverseajax" />
+	</bean>
+
+	<bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
+		<property name="host" value="localhost" />
+	</bean>
+
 </beans>

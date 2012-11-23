@@ -22,7 +22,7 @@ public class MessageEventListener implements ApplicationListener<MessageEvent> {
         WebContext webContext = WebContextFactory.get();
 
         ScriptBuffer scriptBuffer = new ScriptBuffer();
-        scriptBuffer.appendCall("showMessage", event.getMessage(), event.getDateString());
+        scriptBuffer.appendCall("showMessage", event.getMessage(), event.getDate());
 
         if (webContext != null) {
             String currentPage = webContext.getCurrentPage();

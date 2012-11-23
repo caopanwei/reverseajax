@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.stereotype.Service;
 
+import com.ajax.reverse.domain.ChannelMessage;
 import com.ajax.reverse.event.MessageEvent;
 
 @Service
@@ -26,7 +27,7 @@ public class ConsoleService extends Thread implements ApplicationEventPublisherA
                     exit = true;
                 } else {
                     System.out.println("Publishing message: " + message);
-                    applicationEventPublisher.publishEvent(new MessageEvent(this, message));
+                    applicationEventPublisher.publishEvent(new MessageEvent(this, new ChannelMessage(message)));
                 }
             } catch (IOException e) {
                 e.printStackTrace();
