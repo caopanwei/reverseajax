@@ -37,8 +37,8 @@ public class MessageService implements ApplicationEventPublisherAware {
         messageRepository.save(message);
     }
 
-    public Collection<Message> findMessagesByChannel(Channel channel, int messageLimit) {
-        return messageRepository.findMessagesByChannel(channel, messageLimit);
+    public Collection<Message> findMessagesByChannel(Channel channel, int messageLimit, int skip) {
+        return messageRepository.findMessagesByChannel(channel, messageLimit, skip);
     }
 
 }

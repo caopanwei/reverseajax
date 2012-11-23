@@ -36,8 +36,7 @@ public class HomeController {
     }
 
     private void addChannelMessagesToModel(String channel, Model model) {
-        model.addAttribute("messages", messageService.findMessagesByChannel(channelService.findByName(channel), MESSAGE_LIMIT));
-
+        model.addAttribute("messages", messageService.findMessagesByChannel(channelService.findByName(channel), MESSAGE_LIMIT, 0));
     }
 
     @RequestMapping(value = "/temporary/{channel}", method = RequestMethod.GET)
