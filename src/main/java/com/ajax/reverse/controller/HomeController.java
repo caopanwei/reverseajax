@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ajax.reverse.domain.Message;
@@ -21,7 +22,7 @@ public class HomeController {
     private ChannelService channelService;
     @Autowired
     private MessageService messageService;
-    private static final int MESSAGE_LIMIT = 12;
+    private static final int MESSAGE_LIMIT = 10;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Model model) {
@@ -51,8 +52,8 @@ public class HomeController {
 
     @ResponseBody
     @RequestMapping(value = "/{channel}/more", method = RequestMethod.POST)
-    public List<Message> loadMoreMessages(@PathVariable String channel) {
-        return (List<Message>) messageService.findMessagesByChannel(channelService.findByName(channel), MESSAGE_LIMIT, MESSAGE_LIMIT);
+    public List<Message> loadMoreMessages(@PathVariable String channel, @RequestParam int skip) {
+        return (List<Message>) messageService.findMessagesByChannel(channelService.findByName(channel), MESSAGE_LIMIT, skip);
     }
 
 }

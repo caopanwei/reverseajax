@@ -50,8 +50,13 @@
 <script>
 $j(document).ready(function() {
 	$("#loadmore").live("click", function() {
+				var visibleMessages = 0;
+			    $j('pre').each(function(index) {
+			        visibleMessages++;
+			    });
                 $j.ajax({
                     type : 'POST',
+                    data: ({skip: visibleMessages}),
                     url : location.href + "/more",
                             success : function(data) {
                                for(var i = 0; i < data.length; i++){
