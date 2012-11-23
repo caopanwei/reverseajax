@@ -16,5 +16,10 @@ public class DwrService {
     public void sendMessage(String message) {
         messageService.sendMessage(message);
     }
+    
+    @RemoteMethod
+    public void sendTemporaryMessage(String message) {
+        messageService.sendTemporaryMessage(message);
+    }
 
 }

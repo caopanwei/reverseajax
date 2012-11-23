@@ -25,13 +25,15 @@ public class ChannelRepository {
             mongoTemplate.dropCollection(Channel.class);
         }
     }
-    
-    public Collection<Channel> getAll(){
+
+    public Collection<Channel> getAll() {
         return mongoTemplate.findAll(Channel.class);
     }
 
-    public void createChannel(String name) {
-        mongoTemplate.save(new Channel(name));
+    public Channel createChannel(String name) {
+        Channel channel = new Channel(name);
+        mongoTemplate.save(channel);
+        return channel;
     }
 
     public MongoTemplate getMongoTemplate() {
@@ -44,6 +46,10 @@ public class ChannelRepository {
 
     public Channel findByName(String name) {
         return mongoTemplate.findById(name, Channel.class);
+    }
+
+    public void save(Channel channel) {
+        mongoTemplate.save(channel);
     }
 
 }

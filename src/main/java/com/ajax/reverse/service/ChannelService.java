@@ -17,9 +17,17 @@ public class ChannelService {
     public Collection<Channel> getChannelList() {
         return channelRepository.getAll();
     }
-    
-    public boolean doesTheChannelExist(String name){
-       return  channelRepository.findByName(name) == null ? false : true;
+
+    public boolean doesTheChannelExist(String name) {
+        return findByName(name) == null ? false : true;
+    }
+
+    public void save(Channel channel) {
+        channelRepository.save(channel);
+    }
+
+    public Channel findByName(String name) {
+        return channelRepository.findByName(name);
     }
 
 }

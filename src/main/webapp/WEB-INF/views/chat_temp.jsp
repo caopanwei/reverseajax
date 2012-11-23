@@ -28,7 +28,7 @@
 	$j(function() {
 		dwr.engine.setActiveReverseAjax(true);
 		$j("#messageForm").submit(function() {
-			DwrService.sendMessage($j("#messageInput").val());
+			DwrService.sendTemporaryMessage($j("#messageInput").val());
 			$j("#messageInput").val("");
 			return false;
 		});

@@ -11,6 +11,9 @@
 
 	<div id="messageDiv">
 		<div id="insertMessage"></div>
+		<c:forEach var="message" items="${messages}">
+            <pre>${message.message}<label style='float:right;font-size:11px'>${message.date}</label></pre>
+		</c:forEach>
 	</div>
 </section>
 
