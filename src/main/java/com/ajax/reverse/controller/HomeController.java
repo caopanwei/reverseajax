@@ -1,33 +1,29 @@
 package com.ajax.reverse.controller;
 
-import java.lang.Thread.State;
-import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ajax.reverse.service.ConsoleService;
+import com.ajax.reverse.service.ChannelService;
 
 @Controller
 public class HomeController {
+
     @Autowired
-    private ConsoleService consoleService;
+    private ChannelService channelService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String home(Locale locale, Model model) {
-        startConsolService();
+    public String home(Model model) {
+        model.addAttribute("channelList", channelService.getChannelList());
         return "home";
     }
 
-    private void startConsolService() {
-        if (consoleService.getState() == State.NEW) {
-            System.out.println("Console has started, from now on you can send messages by typing here");
-            System.out.println("You can close the console by typing 'exit'");
-            consoleService.start();
-        }
+    @RequestMapping(value = "/{channel}", method = RequestMethod.GET)
+    public String showChannel(@PathVariable String channel) {
+        return "chat";
     }
 
 }

@@ -1,5 +1,7 @@
 package com.ajax.reverse.dao;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
@@ -22,6 +24,10 @@ public class ChannelRepository {
         if (mongoTemplate.collectionExists(Channel.class)) {
             mongoTemplate.dropCollection(Channel.class);
         }
+    }
+    
+    public Collection<Channel> getAll(){
+        return mongoTemplate.findAll(Channel.class);
     }
 
     public void createChannel(String name) {
