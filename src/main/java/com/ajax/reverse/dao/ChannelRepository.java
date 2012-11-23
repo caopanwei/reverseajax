@@ -42,4 +42,8 @@ public class ChannelRepository {
         this.mongoTemplate = mongoTemplate;
     }
 
+    public Channel findByName(String name) {
+        return mongoTemplate.findById(name, Channel.class);
+    }
+
 }

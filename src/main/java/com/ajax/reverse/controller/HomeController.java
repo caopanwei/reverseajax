@@ -23,7 +23,16 @@ public class HomeController {
 
     @RequestMapping(value = "/{channel}", method = RequestMethod.GET)
     public String showChannel(@PathVariable String channel) {
-        return "chat";
+        if (channelService.doesTheChannelExist(channel)) {
+            return "chat";
+        } else {
+            return "redirect:/temporary/" + channel;
+        }
+    }
+
+    @RequestMapping(value = "/temporary/{channel}", method = RequestMethod.GET)
+    public String showTemporaryChannel(@PathVariable String channel) {
+        return "chat_temp";
     }
 
 }

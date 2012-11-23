@@ -17,5 +17,9 @@ public class ChannelService {
     public Collection<Channel> getChannelList() {
         return channelRepository.getAll();
     }
+    
+    public boolean doesTheChannelExist(String name){
+       return  channelRepository.findByName(name) == null ? false : true;
+    }
 
 }
