@@ -14,6 +14,8 @@
 		<c:forEach var="message" items="${messages}">
             <pre>${message.message}<label style='float:right;font-size:11px'>${message.date}</label></pre>
 		</c:forEach>
+		<div id="insertMoreMessage"></div>
+		<button id="loadmore" class="btn btn-primary btn-large btn-block">Load more</button>
 	</div>
 </section>
 
@@ -44,4 +46,17 @@
 				.insertAfter($j("#insertMessage"));
 		$j("#messageDiv").append("<br/>");
 	}
+</script>
+<script>
+$j(document).ready(function() {
+	$("#loadmore").live("click", function() {
+                $j.ajax({
+                    type : 'GET',
+                    url : location.href + "/more",
+                            success : function(data) {
+                               alert(data)
+                            }
+                        });
+            });
+});
 </script>
