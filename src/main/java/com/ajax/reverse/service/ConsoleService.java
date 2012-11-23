@@ -18,8 +18,8 @@ public class ConsoleService extends Thread implements ApplicationEventPublisherA
 
     @Override
     public void run() {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         while (!exit) {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             try {
                 String message = bufferedReader.readLine();
                 if ("exit".equalsIgnoreCase(message)) {

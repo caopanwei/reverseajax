@@ -13,7 +13,6 @@ import com.ajax.reverse.service.ConsoleService;
 
 @Controller
 public class HomeController {
-
     @Autowired
     private ConsoleService consoleService;
 
