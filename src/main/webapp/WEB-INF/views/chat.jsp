@@ -51,10 +51,15 @@
 $j(document).ready(function() {
 	$("#loadmore").live("click", function() {
                 $j.ajax({
-                    type : 'GET',
+                    type : 'POST',
                     url : location.href + "/more",
                             success : function(data) {
-                               alert(data)
+                               for(var i = 0; i < data.length; i++){
+                            	   $j("<pre>" + data[i].message + "<label style='float:right;font-size:11px'>"
+                                                   + data[i].date + "</label>" + "</pre>").hide().fadeIn(500)
+                                           .insertBefore($j("#insertMoreMessage"));
+                                   $j("#messageDiv").append("<br/>");
+                               }
                             }
                         });
             });

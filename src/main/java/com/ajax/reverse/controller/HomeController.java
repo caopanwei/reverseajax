@@ -50,7 +50,7 @@ public class HomeController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/{channel}/more", method = RequestMethod.GET)
+    @RequestMapping(value = "/{channel}/more", method = RequestMethod.POST)
     public List<Message> loadMoreMessages(@PathVariable String channel) {
         return (List<Message>) messageService.findMessagesByChannel(channelService.findByName(channel), MESSAGE_LIMIT, MESSAGE_LIMIT);
     }
