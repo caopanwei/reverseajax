@@ -30,12 +30,13 @@
 		dwr.engine.setActiveReverseAjax(true);
 		$j("#messageForm").submit(function() {
 			DwrService.sendMessage($j("#messageInput").val());
+			$j("#messageInput").val("");
 			return false;
 		});
 	});
 
-	function showMessage(status) {
-		$j("<pre>" + status + "</pre>").hide().fadeIn(500).insertAfter(
+	function showMessage(status, date) {
+		$j("<pre>" + status + "<label style='float:right;font-size:11px'>" + date + "</label>" +"</pre>").hide().fadeIn(500).insertAfter(
 				$j("#insertMessage"));
 		$j("#messageDiv").append("<br/>");
 	}
