@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
+import com.ajax.reverse.domain.Channel;
 import com.ajax.reverse.domain.Message;
 import com.ajax.reverse.event.MessageEvent;
 import com.ajax.reverse.service.ChannelService;
@@ -41,8 +42,11 @@ public class MessageEventListener implements ApplicationListener<MessageEvent> {
     }
 
     private void saveMessageToDatabase(Message message, String channel) {
-        message.setChannel(channelService.findByName(channel));
-        messageService.save(message);
+        Channel channel2 = channelService.findByName(channel);
+        if (channel2 != null) {
+            message.setChannel(channel2);
+            messageService.save(message);
+        }
     }
 
     private void broadcastMessage(ScriptBuffer scriptBuffer) {
