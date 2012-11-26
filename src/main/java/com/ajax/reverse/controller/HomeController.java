@@ -56,4 +56,12 @@ public class HomeController {
         return (List<Message>) messageService.findMessagesByChannel(channelService.findByName(channel), MESSAGE_LIMIT, skip);
     }
 
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String createNewChannel(@RequestParam String channel) {
+        if (channel.trim().length() > 0) {
+            channelService.create(channel);
+        }
+        return "redirect:/";
+    }
+
 }

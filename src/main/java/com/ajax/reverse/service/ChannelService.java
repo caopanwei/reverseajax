@@ -29,5 +29,9 @@ public class ChannelService {
     public Channel findByName(String name) {
         return channelRepository.findByName(name);
     }
+    
+    public Channel create(String name){
+        return channelRepository.create(name);
+    }
 
 }

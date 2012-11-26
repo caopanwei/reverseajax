@@ -24,7 +24,7 @@ public class InitializerListener implements ServletContextListener {
             channelRepository.setMongoTemplate(mongoTemplate);
             channelRepository.dropCollection();
             channelRepository.createCollection();
-            channelRepository.createChannel("default");
+            channelRepository.create("default");
             MessageRepository messageRepository = new MessageRepository();
             messageRepository.setMongoTemplate(mongoTemplate);
             messageRepository.dropCollection();

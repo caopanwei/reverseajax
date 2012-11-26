@@ -30,9 +30,9 @@ public class ChannelRepository {
         return mongoTemplate.findAll(Channel.class);
     }
 
-    public Channel createChannel(String name) {
+    public Channel create(String name) {
         Channel channel = new Channel(name);
-        mongoTemplate.save(channel);
+        save(channel);
         return channel;
     }
 
