@@ -59,9 +59,18 @@ public class MessageRepository {
                 .skip(skip);
         return mongoTemplate.find(query, Message.class);
     }
+    
+    public Collection<Message> findMessagesByChannel(Channel channel) {
+        Query query = new Query(Criteria.where("channel.$id").is(channel.getName()));
+        return mongoTemplate.find(query, Message.class);
+    }
 
     public long countByChannel(Channel channel) {
         return mongoTemplate.count(new Query(Criteria.where("channel.$id").is(channel.getName())), Message.class);
+    }
+
+    public void remove(Message message) {
+        mongoTemplate.remove(message);
     }
 
 }

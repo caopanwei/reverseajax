@@ -65,4 +65,10 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @RequestMapping(value = "/{channel}/remove", method = RequestMethod.POST)
+    public String removeChannel(@PathVariable String channel) {
+        channelService.delete(channelService.findByName(channel));
+        return "redirect:/";
+    }
+
 }

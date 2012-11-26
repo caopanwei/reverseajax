@@ -40,9 +40,17 @@ public class MessageService implements ApplicationEventPublisherAware {
     public Collection<Message> findMessagesByChannel(Channel channel, int messageLimit, int skip) {
         return messageRepository.findMessagesByChannel(channel, messageLimit, skip);
     }
+    
+    public Collection<Message> findMessagesByChannel(Channel channel) {
+        return messageRepository.findMessagesByChannel(channel);
+    }
 
     public long countByChannel(Channel channel) {
         return messageRepository.countByChannel(channel);
+    }
+    
+    public void remove(Message message){
+        messageRepository.remove(message);
     }
 
 }

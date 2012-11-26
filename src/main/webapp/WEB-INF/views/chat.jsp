@@ -17,8 +17,8 @@
         <div id="insertMoreMessage"></div>
         <button id="loadmore" class="btn btn-primary btn-large btn-block"><span id="load_text">Load more</span></button>
     </div>
+    <br/>
 </section>
-
 
 <script type="text/javascript"
     src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
@@ -67,7 +67,6 @@ $j(document).ready(function() {
                                    $j("<pre>" + data[i].message + "<label style='float:right;font-size:11px'>"
                                                    + data[i].date + "</label>" + "</pre>").hide().fadeIn(500)
                                            .insertBefore($j("#insertMoreMessage"));
-                                   $j("#messageDiv").append("<br/>");
                                }
                             }
                         });

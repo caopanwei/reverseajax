@@ -52,4 +52,8 @@ public class ChannelRepository {
         mongoTemplate.save(channel);
     }
 
+    public void delete(Channel channel) {
+        mongoTemplate.remove(channel);
+    }
+
 }
