@@ -55,8 +55,13 @@ public class MessageRepository {
     }
 
     public Collection<Message> findMessagesByChannel(Channel channel, int messageLimit, int skip) {
-        Query query = new Query(Criteria.where("channel.$id").is(channel.getName())).limit(messageLimit).with(new Sort(Direction.DESC, "date")).skip(skip);
+        Query query = new Query(Criteria.where("channel.$id").is(channel.getName())).limit(messageLimit).with(new Sort(Direction.DESC, "date"))
+                .skip(skip);
         return mongoTemplate.find(query, Message.class);
+    }
+
+    public long countByChannel(Channel channel) {
+        return mongoTemplate.count(new Query(Criteria.where("channel.$id").is(channel.getName())), Message.class);
     }
 
 }

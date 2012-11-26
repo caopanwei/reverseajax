@@ -15,7 +15,6 @@
             <pre>${message.message}<label style='float:right;font-size:11px'>${message.date}</label></pre>
 		</c:forEach>
 		<div id="insertMoreMessage"></div>
-		<button id="loadmore" class="btn btn-primary btn-large btn-block">Load more</button>
 	</div>
 </section>
 
@@ -49,24 +48,32 @@
 </script>
 <script>
 $j(document).ready(function() {
-	$("#loadmore").live("click", function() {
-				var visibleMessages = 0;
-			    $j('pre').each(function(index) {
-			        visibleMessages++;
-			    });
-                $j.ajax({
-                    type : 'POST',
-                    data: ({skip: visibleMessages}),
-                    url : location.href + "/more",
-                            success : function(data) {
-                               for(var i = 0; i < data.length; i++){
-                            	   $j("<pre>" + data[i].message + "<label style='float:right;font-size:11px'>"
-                                                   + data[i].date + "</label>" + "</pre>").hide().fadeIn(500)
-                                           .insertBefore($j("#insertMoreMessage"));
-                                   $j("#messageDiv").append("<br/>");
-                               }
-                            }
-                        });
-            });
+	loadMoreMessagesAjax();
+	
+	$j(document).scroll(function(){
+		if( ($(document).scrollTop() / ($(document).height() - $(window).height())) * 100 > 80){
+			loadMoreMessagesAjax();			
+		}
+	});
+	
+	function loadMoreMessagesAjax(){
+		var visibleMessages = 0;
+	    $j('pre').each(function(index) {
+	        visibleMessages++;
+	    });
+	             $j.ajax({
+	                 type : 'POST',
+	                 data: ({skip: visibleMessages}),
+	                 url : location.href + "/more",
+	                         success : function(data) {
+	                            for(var i = 0; i < data.length; i++){
+	                         	   $j("<pre>" + data[i].message + "<label style='float:right;font-size:11px'>"
+	                                                + data[i].date + "</label>" + "</pre>").hide().fadeIn(500)
+	                                        .insertBefore($j("#insertMoreMessage"));
+	                                $j("#messageDiv").append("<br/>");
+	                            }
+	                         }
+	             });
+	}
 });
 </script>

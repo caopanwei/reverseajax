@@ -32,13 +32,17 @@ public class MessageService implements ApplicationEventPublisherAware {
     public void sendTemporaryMessage(String message) {
         applicationEventPublisher.publishEvent(new MessageEvent(this, new ChannelTemporaryMessage(message)));
     }
-    
-    public void save(Message message){
+
+    public void save(Message message) {
         messageRepository.save(message);
     }
 
     public Collection<Message> findMessagesByChannel(Channel channel, int messageLimit, int skip) {
         return messageRepository.findMessagesByChannel(channel, messageLimit, skip);
+    }
+
+    public long countByChannel(Channel channel) {
+        return messageRepository.countByChannel(channel);
     }
 
 }
