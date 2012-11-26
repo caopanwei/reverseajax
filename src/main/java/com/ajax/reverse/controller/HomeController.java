@@ -2,6 +2,11 @@ package com.ajax.reverse.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import net.tanesha.recaptcha.ReCaptchaImpl;
+import net.tanesha.recaptcha.ReCaptchaResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,9 +63,17 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createNewChannel(@RequestParam String channel) {
-        if (channel.trim().length() > 0) {
-            channelService.create(channel);
+    public String createNewChannel(@RequestParam String channel, HttpServletRequest request) {
+        ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+        reCaptcha.setPrivateKey("6LdbmdkSAAAAAFo_sUAlShyOY3qioTZPYIp-PKzU");
+        String remoteAddr = request.getRemoteAddr();
+        String challengeField = request.getParameter("recaptcha_challenge_field");
+        String responseField = request.getParameter("recaptcha_response_field");
+        ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challengeField, responseField);
+        if (reCaptchaResponse.isValid()) {
+            if (channel.trim().length() > 0) {
+                channelService.create(channel);
+            }
         }
         return "redirect:/";
     }
