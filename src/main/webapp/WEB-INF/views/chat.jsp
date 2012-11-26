@@ -15,7 +15,7 @@
             <pre>${message.message}<label style='float:right;font-size:11px'>${message.date}</label></pre>
         </c:forEach>
         <div id="insertMoreMessage"></div>
-        <button id="loadmore" class="btn btn-primary btn-large btn-block">Load more</button>
+        <button id="loadmore" class="btn btn-primary btn-large btn-block"><span id="load_text">Load more</span></button>
     </div>
 </section>
 
@@ -57,8 +57,12 @@ $j(document).ready(function() {
                 $j.ajax({
                     type : 'POST',
                     data: ({skip: visibleMessages}),
+                    beforeSend : function(){
+                    	$('#load_text').html('<img id="loading_img" src="http://www.tagmobile.com/site/images/ajax-loader.gif" width=30px height=30px/>');
+                    },
                     url : location.href + "/more",
                             success : function(data) {
+                            	$j("#load_text").html("Load more");
                                for(var i = 0; i < data.length; i++){
                                    $j("<pre>" + data[i].message + "<label style='float:right;font-size:11px'>"
                                                    + data[i].date + "</label>" + "</pre>").hide().fadeIn(500)
