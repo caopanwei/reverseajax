@@ -58,11 +58,13 @@ $j(document).ready(function() {
                     type : 'POST',
                     data: ({skip: visibleMessages}),
                     beforeSend : function(){
-                    	$('#load_text').html('<img id="loading_img" src="http://www.tagmobile.com/site/images/ajax-loader.gif" width=30px height=30px/>');
+                    	$j("#loadmore").remove();
+                    	$j('#insertMoreMessage').after('<img id="loading_img" src="http://www.tagmobile.com/site/images/ajax-loader.gif" width=30px height=30px/>');
                     },
                     url : location.href + "/more",
                             success : function(data) {
-                            	$j("#load_text").html("Load more");
+                               $j("#loading_img").remove();
+                               $j('#insertMoreMessage').after('<button id="loadmore" class="btn btn-primary btn-large btn-block"><span id="load_text">Load more</span></button>');
                                for(var i = 0; i < data.length; i++){
                                    $j("<pre>" + data[i].message + "<label style='float:right;font-size:11px'>"
                                                    + data[i].date + "</label>" + "</pre>").hide().fadeIn(500)
