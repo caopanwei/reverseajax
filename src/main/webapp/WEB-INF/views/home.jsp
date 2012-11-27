@@ -1,4 +1,4 @@
-<%@taglib uri="/WEB-INF/tlds/capthca.tld" prefix="captcha"%>
+<%@taglib tagdir="/WEB-INF/tags" prefix="captcha" %>
 
 <section id="typography" style="text-align: center;">
 	<h1>Create new channel</h1>
@@ -9,7 +9,7 @@
 			placeholder="Channel's name" required>
 		<button type="submit" class="btn">Create</button>
 		<center>
-            <captcha:captcha publickey="6LdbmdkSAAAAAENC9yWH-z7pWRNSCagqJ_4uFKPu" privatekey="6LdbmdkSAAAAAFo_sUAlShyOY3qioTZPYIp-PKzU" themeName="clean"/>
+            <captcha:captcha publickey="6LdbmdkSAAAAAENC9yWH-z7pWRNSCagqJ_4uFKPu" privatekey="6LdbmdkSAAAAAFo_sUAlShyOY3qioTZPYIp-PKzU" theme="blackglass"/>
         </center>
 	</form>
 	<h1>List of the channels</h1>
