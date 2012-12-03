@@ -16,12 +16,14 @@ public class ChannelMessage implements Message {
     private ObjectId objectId;
     private String message;
     private String date;
+    private String from;
     @DBRef
     @Indexed
     private Channel channel;
 
-    public ChannelMessage(String message) {
+    public ChannelMessage(String from, String message) {
         super();
+        setFrom(from);
         setMessage(message);
         setDate(new SimpleDateFormat("MM-dd hh:mm:ss").format(new Date()));
     }
@@ -64,6 +66,16 @@ public class ChannelMessage implements Message {
     @Override
     public void setChannel(Channel channel) {
         this.channel = channel;
+    }
+
+    @Override
+    public String getFrom() {
+        return from;
+    }
+
+    @Override
+    public void setFrom(String from) {
+        this.from = from;
     }
 
 }

@@ -1,6 +1,6 @@
 package com.ajax.reverse.controller;
 
-import java.util.List;
+import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.HtmlUtils;
 
 import com.ajax.reverse.domain.Message;
 import com.ajax.reverse.service.ChannelService;
@@ -46,10 +47,6 @@ public class HomeController {
         }
     }
 
-    private void addChannelMessagesToModel(String channel, Model model) {
-        model.addAttribute("messages", messageService.findMessagesByChannel(channelService.findByName(channel), MESSAGE_LIMIT, 0));
-    }
-
     @RequestMapping(value = "/temporary/{channel}", method = RequestMethod.GET)
     public String showTemporaryChannel(@PathVariable String channel) {
         return "chat_temp";
@@ -57,9 +54,11 @@ public class HomeController {
 
     @ResponseBody
     @RequestMapping(value = "/{channel}/more", method = RequestMethod.POST)
-    public List<Message> loadMoreMessages(@PathVariable String channel, @RequestParam int skip) throws InterruptedException {
+    public Collection<Message> loadMoreMessages(@PathVariable String channel, @RequestParam int skip) throws InterruptedException {
         Thread.sleep(2000);
-        return (List<Message>) messageService.findMessagesByChannel(channelService.findByName(channel), MESSAGE_LIMIT, skip);
+        Collection<Message> messagesByChannel = messageService.findMessagesByChannel(channelService.findByName(channel), MESSAGE_LIMIT, skip);
+        htmlEscapeMessages(messagesByChannel);
+        return messagesByChannel;
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -82,6 +81,20 @@ public class HomeController {
     public String removeChannel(@PathVariable String channel) {
         channelService.delete(channelService.findByName(channel));
         return "redirect:/";
+    }
+
+    private void htmlEscapeMessages(Collection<Message> messagesByChannel) {
+        for (Message message : messagesByChannel) {
+            message.setMessage(HtmlUtils.htmlEscape(message.getMessage()));
+            message.setFrom(HtmlUtils.htmlEscape(message.getFrom()));
+            message.setDate(HtmlUtils.htmlEscape(message.getDate()));
+        }
+    }
+
+    private void addChannelMessagesToModel(String channel, Model model) {
+        Collection<Message> messagesByChannel = messageService.findMessagesByChannel(channelService.findByName(channel), MESSAGE_LIMIT, 0);
+        htmlEscapeMessages(messagesByChannel);
+        model.addAttribute("messages", messagesByChannel);
     }
 
 }

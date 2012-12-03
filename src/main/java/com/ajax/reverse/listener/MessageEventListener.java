@@ -11,6 +11,7 @@ import org.directwebremoting.WebContextFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.HtmlUtils;
 
 import com.ajax.reverse.domain.Channel;
 import com.ajax.reverse.domain.ChannelMessage;
@@ -31,7 +32,7 @@ public class MessageEventListener implements ApplicationListener<MessageEvent> {
     public void onApplicationEvent(MessageEvent event) {
         WebContext webContext = WebContextFactory.get();
         ScriptBuffer scriptBuffer = new ScriptBuffer();
-        scriptBuffer.appendCall("showMessage", event.getTextMessage(), event.getDate());
+        scriptBuffer.appendCall("showMessage", htmlEscape(event.getFrom()), htmlEscape(event.getTextMessage()), htmlEscape(event.getDate()));
         if (webContext != null) {
             String currentPage = webContext.getCurrentPage();
             if (event.getMessage() instanceof ChannelMessage) {
@@ -42,6 +43,10 @@ public class MessageEventListener implements ApplicationListener<MessageEvent> {
         } else {
             broadcastMessage(scriptBuffer);
         }
+    }
+
+    private String htmlEscape(String string) {
+        return HtmlUtils.htmlEscape(string);
     }
 
     private void saveMessageToDatabase(Message message, String channel) {

@@ -13,13 +13,13 @@ public class DwrService {
     private MessageService messageService;
 
     @RemoteMethod
-    public void sendMessage(String message) {
-        messageService.sendMessage(message);
+    public void sendMessage(String from, String message) {
+        messageService.sendMessage(from, message);
     }
     
     @RemoteMethod
-    public void sendTemporaryMessage(String message) {
-        messageService.sendTemporaryMessage(message);
+    public void sendTemporaryMessage(String from, String message) {
+        messageService.sendTemporaryMessage(from, message);
     }
 
 }

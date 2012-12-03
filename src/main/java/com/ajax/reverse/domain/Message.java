@@ -21,4 +21,9 @@ public interface Message {
     Channel getChannel();
     
     void setChannel(Channel channel);
+    
+    String getFrom();
+    
+    void setFrom(String from);
+    
 }

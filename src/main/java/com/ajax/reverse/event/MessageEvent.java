@@ -26,4 +26,8 @@ public class MessageEvent extends ApplicationEvent {
         return message;
     }
 
+    public String getFrom() {
+        return message.getFrom();
+    }
+
 }
