@@ -54,4 +54,20 @@ public class ChannelService {
         }
     }
 
+    public ChannelRepository getChannelRepository() {
+        return channelRepository;
+    }
+
+    public void setChannelRepository(ChannelRepository channelRepository) {
+        this.channelRepository = channelRepository;
+    }
+
+    public MessageService getMessageService() {
+        return messageService;
+    }
+
+    public void setMessageService(MessageService messageService) {
+        this.messageService = messageService;
+    }
+
 }
