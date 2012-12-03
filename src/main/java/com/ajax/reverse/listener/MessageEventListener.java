@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 import com.ajax.reverse.domain.Channel;
+import com.ajax.reverse.domain.ChannelMessage;
 import com.ajax.reverse.domain.Message;
 import com.ajax.reverse.event.MessageEvent;
 import com.ajax.reverse.service.ChannelService;
@@ -33,7 +34,9 @@ public class MessageEventListener implements ApplicationListener<MessageEvent> {
         scriptBuffer.appendCall("showMessage", event.getTextMessage(), event.getDate());
         if (webContext != null) {
             String currentPage = webContext.getCurrentPage();
-            saveMessageToDatabase(event.getMessage(), currentPage.substring(currentPage.lastIndexOf("/") + 1));
+            if (event.getMessage() instanceof ChannelMessage) {
+                saveMessageToDatabase(event.getMessage(), currentPage.substring(currentPage.lastIndexOf("/") + 1));
+            }
             sessionsByPage = webContext.getScriptSessionsByPage(currentPage);
             broadcastMessage(scriptBuffer);
         } else {
