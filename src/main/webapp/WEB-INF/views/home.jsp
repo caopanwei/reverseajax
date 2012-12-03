@@ -8,6 +8,7 @@
 		<input type="text" class="input-large" name="channel"
 			placeholder="Channel's name" required>
 		<button type="submit" class="btn">Create</button>
+		<br/><br/>
 		<center>
             <captcha:captcha publickey="6LdbmdkSAAAAAENC9yWH-z7pWRNSCagqJ_4uFKPu" privatekey="6LdbmdkSAAAAAFo_sUAlShyOY3qioTZPYIp-PKzU" theme="blackglass"/>
         </center>
