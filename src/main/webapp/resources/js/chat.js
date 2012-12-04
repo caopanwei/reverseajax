@@ -22,7 +22,8 @@ $j(function () {
 });
 
 function showMessage(from, message, date, id) {
-    $j("<pre id='" + id + "' draggable='true' ondragstart='drag(event)'><span class='label label-important' style='float:left'> " + from + "</span>" + message + "<label style='float:right;font-size:11px' data-dismiss='alert'>" + date + " x</label>" + "</pre>").hide().fadeIn(500)
+    $j('<div id="modal_"' + id + '" class="modal hide fade" tabindex="-1"><div class="modal-header"><h3 id="myModalLabel">Reply</h3></div><div class="modal-body"><textarea id="messageInput" placeholder="Message" style="max-width: 510px;min-width: 510px;"></textarea></div><div class="modal-footer"><button class="btn" data-dismiss="modal">Close</button><button class="btn btn-primary">Send</button></div></div> ').insertAfter($j("#insertMessage"));
+    $j("<pre id='" + id + "' draggable='true' ondragstart='drag(event)'><span class='label label-important' style='float:left'> " + from + "</span><button type='button' class='btn btn-mini' data-toggle='modal' data-target='#modal_'" + id + "' style='float:left'><i class='icon-pencil'></i></button>" + message + "<label style='float:right;font-size:11px' data-dismiss='alert'>" + date + " x</label>" + "</pre>").hide().fadeIn(500)
         .insertAfter($j("#insertMessage"));
     $j("#messageDiv").append("<br/>");
 }
@@ -47,7 +48,8 @@ $j(document).ready(function () {
                 $j("#loading_img").remove();
                 $j('#insertMoreMessage').after('<button id="loadmore" class="btn btn-primary btn-large btn-block"><span id="load_text">Load more</span></button>');
                 for (var i = 0; i < data.length; i++) {
-                    $j("<pre id='" + data[i].objectId +"' draggable='true' ondragstart='drag(event)'><span class='label label-important' style='float:left'> " + data[i].from + "</span>" + data[i].message + "<label style='float:right;font-size:11px' data-dismiss='alert'>" + data[i].date + " x</label>" + "</pre>").hide().fadeIn(500)
+                	$j('<div id="modal_' + data[i].objectId + '" class="modal hide fade" tabindex="-1"><div class="modal-header"><h3 id="myModalLabel">Reply</h3></div><div class="modal-body"><textarea id="messageInput" placeholder="Message" style="max-width: 510px;min-width: 510px;"></textarea></div><div class="modal-footer"><button class="btn" data-dismiss="modal">Close</button><button class="btn btn-primary">Send</button></div></div> ').insertAfter($j("#insertMoreMessage"));
+                	$j("<pre id='" + data[i].objectId + "' draggable='true' ondragstart='drag(event)'><span class='label label-important' style='float:left'> " + data[i].from + "</span><button type='button' class='btn btn-mini' data-toggle='modal' data-target='#modal_" + data[i].objectId + "' style='float:left'><i class='icon-pencil'></i></button>" + data[i].message + "<label style='float:right;font-size:11px' data-dismiss='alert'>" + data[i].date + " x</label>" + "</pre>").hide().fadeIn(500)
                         .insertBefore($j("#insertMoreMessage"));
                 }
             }

@@ -13,9 +13,21 @@
     <div class="alert alert-info" ondrop="drop(event)" ondragover="allowDrop(event)">You can drag and drop messages here..</div>
     <div id="messageDiv">
         <div id="insertMessage"></div>
-        <c:forEach var="message" items="${messages}" varStatus="counter"> 
-            <pre id="${message.objectId}" draggable="true" ondragstart="drag(event)">
-                <span class='label label-important' style='float:left'>${message.from}</span><a href="#myModal" data-toggle="modal" class="btn btn-mini" style='float:left'><i class="icon-pencil"></i></a>${message.message}<label style='float:right;font-size:11px' data-dismiss="alert">${message.date} x</label></pre>
+        <c:forEach var="message" items="${messages}" varStatus="counter">
+            <!-- Modal -->
+            <div id="modal_${message.objectId}" class="modal hide fade" tabindex="-1">
+                <div class="modal-header">
+                     <h3 id="myModalLabel">Reply</h3>
+                </div>
+                <div class="modal-body">
+                    <textarea id="messageInput" placeholder="Message" style="max-width: 510px;min-width: 510px;"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Send</button>
+                </div>
+            </div> <pre id="${message.objectId}" draggable="true" ondragstart="drag(event)">
+                <span class='label label-important' style='float:left'>${message.from}</span><button type="button" class="btn btn-mini" data-toggle="modal" data-target="#modal_${message.objectId}" style='float:left'><i class="icon-pencil"></i></button>${message.message}<label style='float:right;font-size:11px' data-dismiss="alert">${message.date} x</label></pre>
         </c:forEach>
         <div id="insertMoreMessage"></div>
         <button id="loadmore" class="btn btn-primary btn-large btn-block"><span id="load_text">Load more</span>
@@ -33,17 +45,3 @@
 <script src="<c:url value=" dwr/util.js "/>"></script>
 <script src="<c:url value=" dwr/interface/DwrService.js "/>"></script>
 <script src="${resources}js/chat.js"></script>
- 
-<!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" >
-  <div class="modal-header">
-    <h3 id="myModalLabel">Reply</h3>
-  </div>
-  <div class="modal-body">
-    <textarea id="messageInput" placeholder="Message" style="max-width: 510px;min-width: 510px;"></textarea>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal">Close</button>
-    <button class="btn btn-primary">Send</button>
-  </div>
-</div>
