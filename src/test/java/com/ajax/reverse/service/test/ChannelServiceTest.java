@@ -87,10 +87,10 @@ public class ChannelServiceTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(channelList1, list);
         Assert.assertEquals(channelList2, list);
     }
-    
+
     @Test
-    public void testDeleteIfItErasesCache(){
-      //GIVEN
+    public void testDeleteIfItErasesCache() {
+        //GIVEN
         List<Channel> list = Arrays.asList(channel);
         BDDMockito.given(channelRepository.getAll()).willReturn(list);
         //WHEN
