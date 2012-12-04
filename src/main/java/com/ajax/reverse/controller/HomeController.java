@@ -1,5 +1,6 @@
 package com.ajax.reverse.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import org.springframework.web.util.HtmlUtils;
 
 import com.ajax.reverse.domain.Channel;
 import com.ajax.reverse.domain.Message;
+import com.ajax.reverse.domain.WrappedMessage;
 import com.ajax.reverse.service.ChannelService;
 import com.ajax.reverse.service.MessageService;
 
@@ -60,11 +62,19 @@ public class HomeController {
 
     @ResponseBody
     @RequestMapping(value = "/{channel}/more", method = RequestMethod.POST)
-    public Collection<Message> loadMoreMessages(@PathVariable String channel, @RequestParam int skip) throws InterruptedException {
+    public Collection<WrappedMessage> loadMoreMessages(@PathVariable String channel, @RequestParam int skip) throws InterruptedException {
         Thread.sleep(2000);
         Collection<Message> messagesByChannel = messageService.findMessagesByChannel(channelService.findByName(channel), MESSAGE_LIMIT, skip);
         htmlEscapeMessages(messagesByChannel);
-        return messagesByChannel;
+        return wrapMessages(messagesByChannel);
+    }
+
+    private Collection<WrappedMessage> wrapMessages(Collection<Message> messagesByChannel) {
+        Collection<WrappedMessage> wrappedMessages = new ArrayList<WrappedMessage>();
+        for(Message msg: messagesByChannel){
+            wrappedMessages.add(new WrappedMessage(msg));
+        }
+        return wrappedMessages;
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

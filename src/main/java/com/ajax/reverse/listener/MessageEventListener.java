@@ -32,13 +32,14 @@ public class MessageEventListener implements ApplicationListener<MessageEvent> {
     public void onApplicationEvent(MessageEvent event) {
         WebContext webContext = WebContextFactory.get();
         ScriptBuffer scriptBuffer = new ScriptBuffer();
-        scriptBuffer.appendCall("showMessage", htmlEscape(event.getFrom()), htmlEscape(event.getTextMessage()), htmlEscape(event.getDate()));
         if (webContext != null) {
             String currentPage = webContext.getCurrentPage();
             if (event.getMessage() instanceof ChannelMessage) {
                 saveMessageToDatabase(event.getMessage(), currentPage.substring(currentPage.lastIndexOf("/") + 1));
             }
             sessionsByPage = webContext.getScriptSessionsByPage(currentPage);
+            scriptBuffer.appendCall("showMessage", htmlEscape(event.getFrom()), htmlEscape(event.getTextMessage()), htmlEscape(event.getDate()),
+                    htmlEscape(String.valueOf(event.getMessage().getObjectId())));
             broadcastMessage(scriptBuffer);
         } else {
             broadcastMessage(scriptBuffer);

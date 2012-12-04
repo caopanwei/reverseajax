@@ -21,8 +21,8 @@ $j(function () {
     });
 });
 
-function showMessage(from, message, date) {
-    $j("<pre id='message_" + i + "_" + date + "' draggable='true' ondragstart='drag(event)'><span class='label label-important' style='float:left'> " + from + "</span>" + message + "<label style='float:right;font-size:11px' data-dismiss='alert'>" + date + " x</label>" + "</pre>").hide().fadeIn(500)
+function showMessage(from, message, date, id) {
+    $j("<pre id='" + id + "' draggable='true' ondragstart='drag(event)'><span class='label label-important' style='float:left'> " + from + "</span>" + message + "<label style='float:right;font-size:11px' data-dismiss='alert'>" + date + " x</label>" + "</pre>").hide().fadeIn(500)
         .insertAfter($j("#insertMessage"));
     $j("#messageDiv").append("<br/>");
 }
@@ -47,7 +47,7 @@ $j(document).ready(function () {
                 $j("#loading_img").remove();
                 $j('#insertMoreMessage').after('<button id="loadmore" class="btn btn-primary btn-large btn-block"><span id="load_text">Load more</span></button>');
                 for (var i = 0; i < data.length; i++) {
-                    $j("<pre id='message_" + i + "_" + data[i].date + "' draggable='true' ondragstart='drag(event)'><span class='label label-important' style='float:left'> " + data[i].from + "</span>" + data[i].message + "<label style='float:right;font-size:11px' data-dismiss='alert'>" + data[i].date + " x</label>" + "</pre>").hide().fadeIn(500)
+                    $j("<pre id='" + data[i].objectId +"' draggable='true' ondragstart='drag(event)'><span class='label label-important' style='float:left'> " + data[i].from + "</span>" + data[i].message + "<label style='float:right;font-size:11px' data-dismiss='alert'>" + data[i].date + " x</label>" + "</pre>").hide().fadeIn(500)
                         .insertBefore($j("#insertMoreMessage"));
                 }
             }
