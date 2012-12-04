@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import org.mockito.ArgumentCaptor;
 import org.mockito.BDDMockito;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -35,6 +37,9 @@ public class ChannelServiceTest extends AbstractTestNGSpringContextTests {
     @Mock
     Channel channel;
 
+    @Captor
+    ArgumentCaptor<String> stringCaptor;
+
     @BeforeClass
     void beforeClass() {
         MockitoAnnotations.initMocks(this);
@@ -44,11 +49,12 @@ public class ChannelServiceTest extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     void beforeMethod() {
-        Mockito.reset(channelRepository, messageService);
+        Mockito.reset(channelRepository, messageService, channel);
+        underTest.clearCache();
     }
 
     @Test
-    void testGetChannelListForCaching() {
+    public void testGetChannelListForCaching() {
         //GIVEN
         List<Channel> list = Arrays.asList(channel);
         BDDMockito.given(channelRepository.getAll()).willReturn(list);
@@ -62,20 +68,41 @@ public class ChannelServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    void testCreateIfItErasesTheCache() {
+    public void testCreateIfItErasesTheCache() {
         //GIVEN
         List<Channel> list = Arrays.asList(channel);
         BDDMockito.given(channelRepository.getAll()).willReturn(list);
         BDDMockito.given(channelRepository.create(BDDMockito.anyString())).willReturn(channel);
         //WHEN
+        underTest.getChannelList();
         Collection<Channel> channelList1 = underTest.getChannelList();
         Channel newChannel = underTest.create("test");
-        list.add(newChannel);
+        underTest.getChannelList();
         Collection<Channel> channelList2 = underTest.getChannelList();
         //THEN
-        Assert.assertEquals(channelList1, list);
+        BDDMockito.verify(channelRepository, new Times(2)).getAll();
+        BDDMockito.verify(channelRepository).create(stringCaptor.capture());
+        Assert.assertEquals(stringCaptor.getValue(), "test");
         Assert.assertEquals(newChannel, channel);
+        Assert.assertEquals(channelList1, list);
         Assert.assertEquals(channelList2, list);
     }
-   
+    
+    @Test
+    public void testDeleteIfItErasesCache(){
+      //GIVEN
+        List<Channel> list = Arrays.asList(channel);
+        BDDMockito.given(channelRepository.getAll()).willReturn(list);
+        //WHEN
+        underTest.getChannelList();
+        Collection<Channel> channelList1 = underTest.getChannelList();
+        underTest.delete(channel);
+        underTest.getChannelList();
+        Collection<Channel> channelList2 = underTest.getChannelList();
+        //THEN
+        BDDMockito.verify(channelRepository, new Times(2)).getAll();
+        Assert.assertEquals(channelList1, list);
+        Assert.assertEquals(channelList2, list);
+    }
+
 }

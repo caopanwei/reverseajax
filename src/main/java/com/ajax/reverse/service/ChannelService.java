@@ -54,6 +54,11 @@ public class ChannelService {
         }
     }
 
+    @TriggersRemove(cacheName = "channels", removeAll = true)
+    public void clearCache() {
+        //for testing purposes
+    }
+
     public ChannelRepository getChannelRepository() {
         return channelRepository;
     }
