@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
 
+import com.ajax.reverse.domain.Channel;
 import com.ajax.reverse.domain.Message;
 import com.ajax.reverse.service.ChannelService;
 import com.ajax.reverse.service.MessageService;
@@ -32,7 +33,12 @@ public class HomeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Model model) {
-        model.addAttribute("channelList", channelService.getChannelList());
+        Collection<Channel> channelList = channelService.getChannelList();
+        for (Channel channel : channelList) {
+            channel.setName(HtmlUtils.htmlUnescape(channel.getName()));
+            channel.setName(HtmlUtils.htmlEscape(channel.getName()));
+        }
+        model.addAttribute("channelList", channelList);
         return "home";
     }
 

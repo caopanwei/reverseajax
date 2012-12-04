@@ -16,31 +16,11 @@
 	</div>
 </section>
 
+<c:url var="resources" value="/resources/" />
 
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-<script type="text/javascript">
-	$j = jQuery.noConflict();
-</script>
-<script type="text/javascript" src="<c:url value="../dwr/engine.js"/>"></script>
-<script type="text/javascript" src="<c:url value="../dwr/util.js"/>"></script>
-<script type="text/javascript"
-	src="<c:url value="../dwr/interface/DwrService.js"/>"></script>
-<script type="text/javascript">
-	$j(function() {
-		dwr.engine.setActiveReverseAjax(true);
-		$j("#messageForm").submit(function() {
-			DwrService.sendTemporaryMessage($j("#nick").val(), $j("#messageInput").val());
-			$j("#messageInput").val("");
-			return false;
-		});
-	});
-
-	function showMessage(from, message, date) {
-        $j(
-                "<pre><span class='label label-info' style='float:left'> " + from + "</span>" + message + "<label style='float:right;font-size:11px'>"
-                        + date + "</label>" + "</pre>").hide().fadeIn(500)
-                .insertAfter($j("#insertMessage"));
-        $j("#messageDiv").append("<br/>");
-    }
-</script>
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script>$j = jQuery.noConflict();</script>
+<script src="<c:url value="../dwr/engine.js"/>"></script>
+<script src="<c:url value="../dwr/util.js"/>"></script>
+<script src="<c:url value="../dwr/interface/DwrService.js"/>"></script>
+<script src="${resources}js/chat_temp.js"></script>   
