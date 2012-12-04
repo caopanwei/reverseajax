@@ -14,7 +14,7 @@
     <div id="messageDiv">
         <div id="insertMessage"></div>
         <c:forEach var="message" items="${messages}" varStatus="counter"> 
-            <pre id="message_${counter.count}_${message.date}" draggable="true" ondragstart="drag(event)"> <span class='label label-important' style='float:left'>${message.from}</span>${message.message}<label style='float:right;font-size:11px' data-dismiss="alert">${message.date} x</label></pre>
+            <pre id="message_${counter.count}_${message.date}" draggable="true" ondragstart="drag(event)"> <span class='label label-important' style='float:left'>${message.from}</span><span style='float:left' class="label label-success">Reply</span>${message.message}<label style='float:right;font-size:11px' data-dismiss="alert">${message.date} x</label></pre>
         </c:forEach>
         <div id="insertMoreMessage"></div>
         <button id="loadmore" class="btn btn-primary btn-large btn-block"><span id="load_text">Load more</span>
