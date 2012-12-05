@@ -17,8 +17,8 @@
 	<hr />
 	<div id="channels" style="width: 50%; margin: auto">
 		<c:forEach var="channel" items="${channelList}">
-			<form method="post" action="<c:url value="/${channel.name}/remove"/>">
-				<a href="<c:url value="/${channel.name}"/>"
+			<form method="post" action="<c:url value="/channel/${channel.name}/remove"/>">
+				<a href="<c:url value="/channel/${channel.name}"/>"
 					class="btn btn-large span4">${channel.name}</a>
 				<button class="btn btn-danger btn-large" type="submit">Remove</button>
 			</form>

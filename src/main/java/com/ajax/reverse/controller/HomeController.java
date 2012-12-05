@@ -44,7 +44,7 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(value = "/{channel}", method = RequestMethod.GET)
+    @RequestMapping(value = "/channel/{channel}", method = RequestMethod.GET)
     public String showChannel(@PathVariable String channel, Model model) {
         if (channelService.doesTheChannelExist(channel)) {
             model.addAttribute("channel", channelService.findByName(channel));
@@ -61,7 +61,7 @@ public class HomeController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/{channel}/more", method = RequestMethod.POST)
+    @RequestMapping(value = "channel/{channel}/more", method = RequestMethod.POST)
     public Collection<WrappedMessage> loadMoreMessages(@PathVariable String channel, @RequestParam int skip) throws InterruptedException {
         Thread.sleep(2000);
         Collection<Message> messagesByChannel = messageService.findMessagesByChannel(channelService.findByName(channel), MESSAGE_LIMIT, skip);
@@ -93,7 +93,7 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/{channel}/remove", method = RequestMethod.POST)
+    @RequestMapping(value = "/channel/{channel}/remove", method = RequestMethod.POST)
     public String removeChannel(@PathVariable String channel) {
         channelService.delete(channelService.findByName(channel));
         return "redirect:/";
