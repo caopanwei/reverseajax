@@ -2,6 +2,7 @@ package com.ajax.reverse.dao;
 
 import java.util.Collection;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -59,7 +60,7 @@ public class MessageRepository {
                 .skip(skip);
         return mongoTemplate.find(query, Message.class);
     }
-    
+
     public Collection<Message> findMessagesByChannel(Channel channel) {
         Query query = new Query(Criteria.where("channel.$id").is(channel.getName()));
         return mongoTemplate.find(query, Message.class);
@@ -71,6 +72,10 @@ public class MessageRepository {
 
     public void remove(Message message) {
         mongoTemplate.remove(message);
+    }
+
+    public Message findById(String id) {
+        return mongoTemplate.findById(new ObjectId(id), Message.class);
     }
 
 }

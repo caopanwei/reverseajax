@@ -7,29 +7,25 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "messages")
-public class ChannelMessage implements Message {
+public class ChannelReplyMessage implements ReplyMessage {
 
     @Id
     private ObjectId objectId;
+    private ObjectId parent;
     private String message;
     private String date;
     private String from;
-    @DBRef
-    @Indexed
-    private Channel channel;
     private Collection<ReplyMessage> replies;
 
-    public ChannelMessage(String from, String message) {
+    public ChannelReplyMessage(ObjectId parent, String from, String message) {
         super();
         setFrom(from);
+        setParent(parent);
         setMessage(message);
         setDate(new SimpleDateFormat("MM-dd HH:mm:ss").format(new Date()));
         replies = new ConcurrentLinkedQueue<ReplyMessage>();
+        objectId = new ObjectId(); //embedded object
     }
 
     @Override
@@ -63,16 +59,6 @@ public class ChannelMessage implements Message {
     }
 
     @Override
-    public Channel getChannel() {
-        return channel;
-    }
-
-    @Override
-    public void setChannel(Channel channel) {
-        this.channel = channel;
-    }
-
-    @Override
     public String getFrom() {
         return from;
     }
@@ -90,6 +76,16 @@ public class ChannelMessage implements Message {
     @Override
     public void addReply(ReplyMessage message) {
         replies.add(message);
+    }
+
+    @Override
+    public ObjectId getParent() {
+        return parent;
+    }
+
+    @Override
+    public void setParent(ObjectId parent) {
+        this.parent = parent;
     }
 
 }

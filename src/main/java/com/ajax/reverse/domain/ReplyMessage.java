@@ -3,10 +3,12 @@ package com.ajax.reverse.domain;
 import java.util.Collection;
 
 import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "messages")
-public interface Message {
+public interface ReplyMessage {
+
+    ObjectId getParent();
+
+    void setParent(ObjectId parent);
 
     String getMessage();
 
@@ -20,10 +22,6 @@ public interface Message {
 
     void setObjectId(ObjectId objectId);
 
-    Channel getChannel();
-
-    void setChannel(Channel channel);
-
     String getFrom();
 
     void setFrom(String from);
@@ -31,5 +29,4 @@ public interface Message {
     Collection<ReplyMessage> getReplies();
 
     void addReply(ReplyMessage message);
-
 }

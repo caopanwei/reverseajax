@@ -16,6 +16,7 @@ import org.springframework.web.util.HtmlUtils;
 import com.ajax.reverse.domain.Channel;
 import com.ajax.reverse.domain.ChannelMessage;
 import com.ajax.reverse.domain.Message;
+import com.ajax.reverse.domain.ReplyMessage;
 import com.ajax.reverse.event.MessageEvent;
 import com.ajax.reverse.service.ChannelService;
 import com.ajax.reverse.service.MessageService;
@@ -40,9 +41,17 @@ public class MessageEventListener implements ApplicationListener<MessageEvent> {
             sessionsByPage = webContext.getScriptSessionsByPage(currentPage);
             scriptBuffer.appendCall("showMessage", htmlEscape(event.getFrom()), htmlEscape(event.getTextMessage()), htmlEscape(event.getDate()),
                     htmlEscape(String.valueOf(event.getMessage().getObjectId())));
+            appendReplies(event.getMessage().getReplies(), scriptBuffer);
             broadcastMessage(scriptBuffer);
         } else {
             broadcastMessage(scriptBuffer);
+        }
+    }
+
+    private void appendReplies(Collection<ReplyMessage> replies, ScriptBuffer scriptBuffer) {
+        for (ReplyMessage reply : replies) {
+            scriptBuffer.appendCall("showReplies", htmlEscape(reply.getMessage()), htmlEscape(reply.getFrom()), htmlEscape(reply.getDate()),
+                    htmlEscape(String.valueOf(reply.getParent() + "_" + String.valueOf(reply.getObjectId()))));
         }
     }
 

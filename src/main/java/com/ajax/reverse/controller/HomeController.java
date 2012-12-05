@@ -71,7 +71,7 @@ public class HomeController {
 
     private Collection<WrappedMessage> wrapMessages(Collection<Message> messagesByChannel) {
         Collection<WrappedMessage> wrappedMessages = new ArrayList<WrappedMessage>();
-        for(Message msg: messagesByChannel){
+        for (Message msg : messagesByChannel) {
             wrappedMessages.add(new WrappedMessage(msg));
         }
         return wrappedMessages;

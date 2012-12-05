@@ -16,10 +16,15 @@ public class DwrService {
     public void sendMessage(String from, String message) {
         messageService.sendMessage(from, message);
     }
-
+    
     @RemoteMethod
     public void sendTemporaryMessage(String from, String message) {
         messageService.sendTemporaryMessage(from, message);
+    }
+    
+    @RemoteMethod
+    public void sendReply(String originalMessageId, String from, String message){
+        messageService.sendReply(originalMessageId, from, message);
     }
 
 }
