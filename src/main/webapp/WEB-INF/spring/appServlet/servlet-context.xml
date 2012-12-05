@@ -23,10 +23,13 @@
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
 	<beans:bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:order="1">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+	
+	<!-- Map returned view name "rssViewer" to bean id "rssViewer" -->
+    <beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0"/>
 
 	<context:component-scan base-package="com.ajax.**" />
 

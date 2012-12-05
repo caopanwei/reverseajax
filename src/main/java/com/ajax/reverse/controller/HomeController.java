@@ -69,9 +69,17 @@ public class HomeController {
         return wrapMessages(messagesByChannel);
     }
 
+    @RequestMapping(value = "/{channel}/rss", method = RequestMethod.GET)
+    public String showRss(@PathVariable String channel, Model model, HttpServletRequest request) {
+        model.addAttribute("messages", messageService.findMessagesByChannel(channelService.findByName(channel)));
+        model.addAttribute("link", request.getRequestURL());
+        model.addAttribute("channel", channel);
+        return "rssService";
+    }
+
     private Collection<WrappedMessage> wrapMessages(Collection<Message> messagesByChannel) {
         Collection<WrappedMessage> wrappedMessages = new ArrayList<WrappedMessage>();
-        for(Message msg: messagesByChannel){
+        for (Message msg : messagesByChannel) {
             wrappedMessages.add(new WrappedMessage(msg));
         }
         return wrappedMessages;

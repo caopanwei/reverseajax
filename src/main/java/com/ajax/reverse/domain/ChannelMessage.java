@@ -25,7 +25,7 @@ public class ChannelMessage implements Message {
         super();
         setFrom(from);
         setMessage(message);
-        setDate(new SimpleDateFormat("MM-dd HH:mm:ss").format(new Date()));
+        setDate(new SimpleDateFormat("yyyy MM-dd HH:mm:ss").format(new Date()));
     }
 
     @Override

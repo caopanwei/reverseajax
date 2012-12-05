@@ -1,5 +1,10 @@
+<c:url var="resources" value="/resources/" />
 <section id="typography" style="text-align: center;">
-     <h1>Hello world!</h1>
+     <h1>
+        <a href="<c:url value="/${channel.name}/rss"/>">
+            <img src="${resources}img/RSS.jpg" width="50px" height="50px"/>
+        </a>
+     </h1>
 
     <form id="messageForm" class="form-inline" action="/">
         <input id="nick" type="text" class="input-big" placeholder="Nickname"
@@ -22,7 +27,6 @@
     </div>
     <br/>
 </section>
-<c:url var="resources" value="/resources/" />
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script>
