@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.ajax.reverse.dao.ChannelRepository;
 import com.ajax.reverse.dao.MessageRepository;
+import com.ajax.reverse.domain.Channel;
+import com.ajax.reverse.domain.ChannelMessage;
 import com.mongodb.Mongo;
 
 /**
@@ -24,11 +26,22 @@ public class InitializerListener implements ServletContextListener {
             channelRepository.setMongoTemplate(mongoTemplate);
             channelRepository.dropCollection();
             channelRepository.createCollection();
-            channelRepository.create("default");
+            Channel channel1 = channelRepository.create("default");
+            Channel channel2 = channelRepository.create("test");
             MessageRepository messageRepository = new MessageRepository();
             messageRepository.setMongoTemplate(mongoTemplate);
             messageRepository.dropCollection();
             messageRepository.createCollection();
+            for (int i = 0; i < 30; i++) {
+                ChannelMessage message = new ChannelMessage("some1", String.valueOf(i));
+                message.setChannel(channel1);
+                messageRepository.save(message);
+            }
+            for (int i = 30; i < 60; i++) {
+                ChannelMessage message = new ChannelMessage("any1", String.valueOf(i));
+                message.setChannel(channel2);
+                messageRepository.save(message);
+            }
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
