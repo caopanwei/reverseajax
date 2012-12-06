@@ -1,3 +1,5 @@
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
 <c:url var="resources" value="/resources/" />
 <section id="typography" style="text-align: center;">
      <h1>

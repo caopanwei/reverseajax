@@ -55,6 +55,17 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
+	<interceptors>
+		<beans:bean
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
+			p:paramName="language" />
+	</interceptors>
+
+	<beans:bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<beans:property name="defaultLocale" value="en" />
+	</beans:bean>
+
 	<beans:bean
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<beans:property name="mappings">
@@ -63,7 +74,7 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
-	
+
 	<context:component-scan base-package="com.ajax.**" />
 
 	<ehcache:annotation-driven />
