@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.feed.AbstractRssFeedView;
 
@@ -21,11 +22,30 @@ import com.sun.syndication.feed.rss.Item;
 @Component("rssService")
 public class RssService extends AbstractRssFeedView {
 
+    @Autowired
+    private ChannelService channelService;
+    @Autowired
+    private MessageService messageService;
+
     @Override
     protected void buildFeedMetadata(Map<String, Object> model, Channel feed, HttpServletRequest request) {
-        feed.setTitle(model.get("channel") + " channel's messages");
+        String url = null;
+        String channel = null;
+
+        if (model.containsKey("url")) {
+            url = (String) model.get("url");
+            channel = (String) model.get("channel");
+        } else {
+            url = request.getRequestURL().toString();
+            channel = url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."));
+        }
+
+        feed.setTitle(channel + " channel's messages");
         feed.setDescription("rss for channel messages");
-        feed.setLink(model.get("link").toString());
+        feed.setLink(url);
+
+        model.put("messages", messageService.findMessagesByChannel(channelService.findByName(channel), 100, 0));
+
         super.buildFeedMetadata(model, feed, request);
     }
 

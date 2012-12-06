@@ -71,8 +71,7 @@ public class HomeController {
 
     @RequestMapping(value = "/{channel}/rss", method = RequestMethod.GET)
     public String showRss(@PathVariable String channel, Model model, HttpServletRequest request) {
-        model.addAttribute("messages", messageService.findMessagesByChannel(channelService.findByName(channel)));
-        model.addAttribute("link", request.getRequestURL());
+        model.addAttribute("url", request.getRequestURL().toString());
         model.addAttribute("channel", channel);
         return "rssService";
     }

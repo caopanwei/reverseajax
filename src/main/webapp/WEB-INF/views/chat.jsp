@@ -1,8 +1,14 @@
 <c:url var="resources" value="/resources/" />
 <section id="typography" style="text-align: center;">
      <h1>
-        <a href="<c:url value="/${channel.name}/rss"/>">
+        <a href="<c:url value="/${channel.name}.rss"/>">
             <img src="${resources}img/RSS.jpg" width="50px" height="50px"/>
+        </a>
+        <a href="<c:url value="/${channel.name}/rss"/>">
+            <img src="${resources}img/rss2.jpg" width="50px" height="50px"/>
+        </a>
+         <a href="<c:url value="/${channel.name}.json"/>">
+            <img src="${resources}img/json.jpg" width="50px" height="50px"/>
         </a>
      </h1>
 
