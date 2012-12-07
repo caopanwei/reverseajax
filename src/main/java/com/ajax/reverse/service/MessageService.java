@@ -26,11 +26,11 @@ public class MessageService implements ApplicationEventPublisherAware {
     }
 
     public void sendMessage(String from, String message) {
-        applicationEventPublisher.publishEvent(new MessageEvent(this, new ChannelMessage(from, message)));
+        publishEvent(new MessageEvent(this, new ChannelMessage(from, message)));
     }
 
     public void sendTemporaryMessage(String from, String message) {
-        applicationEventPublisher.publishEvent(new MessageEvent(this, new ChannelTemporaryMessage(from, message)));
+        publishEvent(new MessageEvent(this, new ChannelTemporaryMessage(from, message)));
     }
 
     public void save(Message message) {
@@ -51,6 +51,10 @@ public class MessageService implements ApplicationEventPublisherAware {
     
     public void remove(Message message){
         messageRepository.remove(message);
+    }
+    
+    private void publishEvent(MessageEvent event){
+        applicationEventPublisher.publishEvent(event);
     }
 
 }
