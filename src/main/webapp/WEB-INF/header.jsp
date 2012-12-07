@@ -1,4 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <c:url var="resources" value="/resources/" />
 
@@ -47,11 +48,11 @@ body {
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <a class="brand" href="<c:url value="/"/>">Project name</a>
+				</a> <a class="brand" href="<c:url value="/"/>"><spring:message code="project.name"/></a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-                        data-toggle="dropdown"> Language <b class="caret"></b>
+                        data-toggle="dropdown"> <spring:message code="dropdown.language"/> <b class="caret"></b>
                     </a>
                         <ul class="dropdown-menu">
                                 <li><a href='?language=HU'><span class="countries" data-country="HU" data-flags="true"></span></a></li>
