@@ -21,6 +21,8 @@
 <script src="${resources}js/bootstrap-collapse.js"></script>
 <script src="${resources}js/bootstrap-carousel.js"></script>
 <script src="${resources}js/bootstrap-typeahead.js"></script>
+<script src="${resources}js/bootstrap-formhelpers-countries.js"></script>
+<script src="${resources}js/bootstrap-formhelpers-countries.en_US.js"></script>
 
 <script>
 	$("#roleRemove").popover('show');

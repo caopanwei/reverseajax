@@ -20,6 +20,7 @@ body {
 }
 </style>
 <link href="${resources}css/bootstrap-responsive.css" rel="stylesheet">
+<link href="${resources}css/bootstrap-formhelpers-countries.flags.css" rel="stylesheet">
 
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -49,6 +50,13 @@ body {
 				</a> <a class="brand" href="<c:url value="/"/>">Project name</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+                        data-toggle="dropdown"> Language <b class="caret"></b>
+                    </a>
+                        <ul class="dropdown-menu">
+                                <li><a href='?language=HU'><span class="countries" data-country="HU" data-flags="true"></span></a></li>
+                                <li><a href='?language=EN'><span class="countries" data-country="GB" data-flags="true"></span></a></li>
+                        </ul></li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->

@@ -13,7 +13,7 @@
             <img src="${resources}img/json.jpg" width="50px" height="50px"/>
         </a>
      </h1>
-
+     
     <form id="messageForm" class="form-inline" action="/">
         <input id="nick" type="text" class="input-big" placeholder="Nickname"
         required>
