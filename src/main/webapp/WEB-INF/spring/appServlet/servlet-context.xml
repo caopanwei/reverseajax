@@ -59,6 +59,7 @@
 		<beans:bean
 			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
 			p:paramName="language" />
+		<beans:bean class="com.ajax.reverse.interceptor.ChannalNameInterceptor" />
 	</interceptors>
 
 	<beans:bean id="localeResolver"
