@@ -11,7 +11,7 @@
 <meta name="author" content="">
 
 <!-- Le styles -->
-<link href="resources/css/bootstrap.css" rel="stylesheet">
+<link href="<spring:theme code="css"/>" rel="stylesheet">
 <style>
 body {
 	padding-top: 60px;
@@ -39,7 +39,6 @@ body {
 </head>
 
 <body>
-
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
@@ -55,6 +54,13 @@ body {
                         <ul class="dropdown-menu">
                                 <li><a href='?language=HU'><span class="countries" data-country="HU" data-flags="true"></span></a></li>
                                 <li><a href='?language=EN'><span class="countries" data-country="GB" data-flags="true"></span></a></li>
+                        </ul></li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle"
+                        data-toggle="dropdown"> <spring:message code="dropdown.theme"/> <b class="caret"></b>
+                    </a>
+                        <ul class="dropdown-menu">
+                                <li><a href='?theme=orange'><spring:message code="orange"/></a></li>
+                                <li><a href='?theme=black'><spring:message code="black"/></a></li>
                         </ul></li>
 					</ul>
 				</div>
