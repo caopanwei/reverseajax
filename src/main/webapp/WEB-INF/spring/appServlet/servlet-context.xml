@@ -28,6 +28,7 @@
 				<beans:entry key="rss" value="application/rss+xml" />
 				<beans:entry key="json" value="application/json" />
 				<beans:entry key="atom" value="application/atom+xml" />
+				<beans:entry key="pdf" value="application/pdf" />
 			</beans:map>
 		</beans:property>
 		<beans:property name="defaultViews">
@@ -37,8 +38,9 @@
 				<beans:bean class="com.ajax.reverse.rss.AtomRss" />
 				<!-- JSON View -->
 				<beans:bean
-					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
-				</beans:bean>
+					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+				<!-- Jasper View -->
+				<beans:bean class="com.ajax.reverse.jasper.JasperReport" p:url="classpath:report2.jrxml"/>
 			</beans:list>
 		</beans:property>
 		<beans:property name="ignoreAcceptHeader" value="true" />
