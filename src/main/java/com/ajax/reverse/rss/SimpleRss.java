@@ -1,9 +1,8 @@
-package com.ajax.reverse.service;
+package com.ajax.reverse.rss;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -15,12 +14,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.feed.AbstractRssFeedView;
 
 import com.ajax.reverse.domain.Message;
+import com.ajax.reverse.service.ChannelService;
+import com.ajax.reverse.service.MessageService;
 import com.sun.syndication.feed.rss.Channel;
 import com.sun.syndication.feed.rss.Content;
 import com.sun.syndication.feed.rss.Item;
 
 @Component("rssService")
-public class RssService extends AbstractRssFeedView {
+public class SimpleRss extends AbstractRssFeedView {
 
     @Autowired
     private ChannelService channelService;
@@ -54,7 +55,6 @@ public class RssService extends AbstractRssFeedView {
         List<Item> items = new ArrayList<Item>();
         @SuppressWarnings("unchecked")
         Collection<Message> messages = (Collection<Message>) model.get("messages");
-        Collections.reverse((List<?>) messages);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy MM-dd HH:mm:ss");
         for (Message message : messages) {
             Item item = new Item();

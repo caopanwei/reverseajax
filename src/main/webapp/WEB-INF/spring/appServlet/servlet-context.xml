@@ -27,12 +27,14 @@
 			<beans:map>
 				<beans:entry key="rss" value="application/rss+xml" />
 				<beans:entry key="json" value="application/json" />
+				<beans:entry key="atom" value="application/atom+xml" />
 			</beans:map>
 		</beans:property>
 		<beans:property name="defaultViews">
 			<beans:list>
 				<!-- RSS View -->
-				<beans:bean class="com.ajax.reverse.service.RssService" />
+				<beans:bean class="com.ajax.reverse.rss.SimpleRss" />
+				<beans:bean class="com.ajax.reverse.rss.AtomRss" />
 				<!-- JSON View -->
 				<beans:bean
 					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">

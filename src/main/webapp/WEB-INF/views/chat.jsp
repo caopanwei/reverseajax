@@ -1,14 +1,16 @@
-<c:url var="resources" value="/resources/" />
 <section id="typography" style="text-align: center;">
      <h1>
         <a href="<c:url value="/${channel.name}.rss"/>">
-            <img src="${resources}img/RSS.jpg" width="50px" height="50px"/>
+            <img src="resources/img/RSS.jpg" width="50px" height="50px"/>
         </a>
         <a href="<c:url value="/${channel.name}/rss"/>">
-            <img src="${resources}img/rss2.jpg" width="50px" height="50px"/>
+            <img src="resources/img/rss2.jpg" width="50px" height="50px"/>
         </a>
-         <a href="<c:url value="/${channel.name}.json"/>">
-            <img src="${resources}img/json.jpg" width="50px" height="50px"/>
+        <a href="<c:url value="/${channel.name}.atom"/>">
+            <img src="resources/img/atom.png" width="50px" height="50px"/>
+        </a>
+        <a href="<c:url value="/${channel.name}.json"/>">
+            <img src="resources/img/json.jpg" width="50px" height="50px"/>
         </a>
      </h1>
      
@@ -41,4 +43,4 @@
 <script src="<c:url value=" dwr/engine.js "/>"></script>
 <script src="<c:url value=" dwr/util.js "/>"></script>
 <script src="<c:url value=" dwr/interface/DwrService.js "/>"></script>
-<script src="${resources}js/chat.js"></script>
+<script src="resources/js/chat.js"></script>

@@ -1,8 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<c:url var="resources" value="/resources/" />
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,15 +11,15 @@
 <meta name="author" content="">
 
 <!-- Le styles -->
-<link href="${resources}css/bootstrap.css" rel="stylesheet">
+<link href="resources/css/bootstrap.css" rel="stylesheet">
 <style>
 body {
 	padding-top: 60px;
 	/* 60px to make the container go all the way to the bottom of the topbar */
 }
 </style>
-<link href="${resources}css/bootstrap-responsive.css" rel="stylesheet">
-<link href="${resources}css/bootstrap-formhelpers-countries.flags.css" rel="stylesheet">
+<link href="resources/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="resources/css/bootstrap-formhelpers-countries.flags.css" rel="stylesheet">
 
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -29,15 +27,15 @@ body {
     <![endif]-->
 
 <!-- Le fav and touch icons -->
-<link rel="shortcut icon" href="${resources}ico/favicon.ico">
+<link rel="shortcut icon" href="resources/ico/favicon.ico">
 <link rel="apple-touch-icon-precomposed" sizes="144x144"
-	href="${resources}ico/apple-touch-icon-144-precomposed.png">
+	href="resources/ico/apple-touch-icon-144-precomposed.png">
 <link rel="apple-touch-icon-precomposed" sizes="114x114"
-	href="${resources}ico/apple-touch-icon-114-precomposed.png">
+	href="resources/ico/apple-touch-icon-114-precomposed.png">
 <link rel="apple-touch-icon-precomposed" sizes="72x72"
-	href="${resources}ico/apple-touch-icon-72-precomposed.png">
+	href="resources/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
-	href="${resources}ico/apple-touch-icon-57-precomposed.png">
+	href="resources/ico/apple-touch-icon-57-precomposed.png">
 </head>
 
 <body>
