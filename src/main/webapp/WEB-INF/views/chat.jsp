@@ -12,6 +12,9 @@
         <a href="<c:url value="/${channel.name}.pdf"/>">
             <img src="resources/img/pdf.png" width="50px" height="50px"/>
         </a>
+        <a href="<c:url value="/${channel.name}.xls"/>">
+            <img src="resources/img/xls.png" width="50px" height="50px"/>
+        </a>
         <a href="<c:url value="/${channel.name}.json"/>">
             <img src="resources/img/json.jpg" width="50px" height="50px"/>
         </a>
