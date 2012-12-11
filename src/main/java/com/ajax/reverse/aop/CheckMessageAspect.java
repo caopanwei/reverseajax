@@ -4,6 +4,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.HtmlUtils;
 
 import com.ajax.reverse.annotation.CheckMessage;
 import com.ajax.reverse.exception.IllegalMessageException;
@@ -25,7 +26,7 @@ public class CheckMessageAspect {
     }
 
     private boolean doesItContainIllegalStrings(String string) {
-        return string.contains("<script>");
+        return !(HtmlUtils.htmlEscape(string).equalsIgnoreCase(string));
     }
 
 }
