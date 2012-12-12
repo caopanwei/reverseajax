@@ -12,7 +12,7 @@ public class TraceInterceptor extends CustomizableTraceInterceptor {
 
     public TraceInterceptor() {
         setEnterMessage("Entering $[targetClassShortName].$[methodName]($[arguments])");
-        setExitMessage("Leaving $[targetClassShortName].$[methodName](): $[returnValue]");
+        setExitMessage("Leaving $[targetClassShortName].$[methodName](): $[returnValue] - execution took $[invocationTime] ms");
     }
 
     @Override

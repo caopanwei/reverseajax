@@ -13,16 +13,16 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView;
 
 import com.ajax.reverse.domain.Channel;
-import com.ajax.reverse.service.JasperDatasourceService;
+import com.ajax.reverse.service.JasperService;
 
 @Component
 public class JasperReport extends JasperReportsPdfView {
 
     @Autowired
-    private JasperDatasourceService jasperDatasourceService;
+    private JasperService jasperDatasourceService;
 
     @Override
-    protected JasperPrint fillReport(Map<String, Object> model) throws Exception {
+    public JasperPrint fillReport(Map<String, Object> model) throws Exception {
         String channelName = null;
         Object channelObject = model.get("channel");
         if (channelObject != null) {

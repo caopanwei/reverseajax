@@ -40,7 +40,7 @@ public class MessageService implements ApplicationEventPublisherAware {
     public Collection<Message> findMessagesByChannel(Channel channel, int messageLimit, int skip) {
         return messageRepository.findMessagesByChannel(channel, messageLimit, skip);
     }
-    
+
     public Collection<Message> findMessagesByChannel(Channel channel) {
         return messageRepository.findMessagesByChannel(channel);
     }
@@ -48,12 +48,12 @@ public class MessageService implements ApplicationEventPublisherAware {
     public long countByChannel(Channel channel) {
         return messageRepository.countByChannel(channel);
     }
-    
-    public void remove(Message message){
+
+    public void remove(Message message) {
         messageRepository.remove(message);
     }
-    
-    private void publishEvent(MessageEvent event){
+
+    private void publishEvent(MessageEvent event) {
         applicationEventPublisher.publishEvent(event);
     }
 

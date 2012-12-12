@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.jasperreports.JasperReportsXlsView;
 
 import com.ajax.reverse.domain.Channel;
-import com.ajax.reverse.service.JasperDatasourceService;
+import com.ajax.reverse.service.JasperService;
 
 @Component
 public class JasperXlsReport extends JasperReportsXlsView {
 
     @Autowired
-    private JasperDatasourceService jasperDatasourceService;
+    private JasperService jasperDatasourceService;
 
     @Override
     protected JasperPrint fillReport(Map<String, Object> model) throws Exception {

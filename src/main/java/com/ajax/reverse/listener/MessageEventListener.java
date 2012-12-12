@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.HtmlUtils;
 
+import com.ajax.reverse.annotation.Trace;
 import com.ajax.reverse.domain.Channel;
 import com.ajax.reverse.domain.ChannelMessage;
 import com.ajax.reverse.domain.Message;
@@ -29,6 +30,7 @@ public class MessageEventListener implements ApplicationListener<MessageEvent> {
     private MessageService messageService;
     private Collection<ScriptSession> sessionsByPage = new HashSet<ScriptSession>();
 
+    @Trace
     public void onApplicationEvent(MessageEvent event) {
         WebContext webContext = WebContextFactory.get();
         ScriptBuffer scriptBuffer = new ScriptBuffer();
