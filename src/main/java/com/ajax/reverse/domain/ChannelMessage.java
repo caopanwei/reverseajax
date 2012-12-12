@@ -78,4 +78,17 @@ public class ChannelMessage implements Message {
         this.from = from;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("ChannelMessage [message=");
+        builder.append(message);
+        builder.append(", date=");
+        builder.append(date);
+        builder.append(", from=");
+        builder.append(from);
+        builder.append("]");
+        return builder.toString();
+    }
+
 }

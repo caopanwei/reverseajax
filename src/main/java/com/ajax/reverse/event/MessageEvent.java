@@ -30,4 +30,13 @@ public class MessageEvent extends ApplicationEvent {
         return message.getFrom();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("MessageEvent [message=");
+        builder.append(message);
+        builder.append("]");
+        return builder.toString();
+    }
+
 }
