@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +24,7 @@ import org.springframework.web.util.HtmlUtils;
 import com.ajax.reverse.domain.Channel;
 import com.ajax.reverse.domain.Message;
 import com.ajax.reverse.domain.WrappedMessage;
+import com.ajax.reverse.dto.JaxMessageDto;
 import com.ajax.reverse.exception.IllegalChannelNameException;
 import com.ajax.reverse.service.ChannelService;
 import com.ajax.reverse.service.MessageService;
@@ -35,6 +37,11 @@ public class HomeController {
     @Autowired
     private MessageService messageService;
     private static final int MESSAGE_LIMIT = 10;
+
+    @ModelAttribute("message")
+    public JaxMessageDto getJaxMessageDto() {
+        return new JaxMessageDto();
+    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Model model) {

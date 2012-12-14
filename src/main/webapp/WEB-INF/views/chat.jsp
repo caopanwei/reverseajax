@@ -49,4 +49,4 @@
 <script src="<c:url value=" dwr/engine.js "/>"></script>
 <script src="<c:url value=" dwr/util.js "/>"></script>
 <script src="<c:url value=" dwr/interface/DwrService.js "/>"></script>
-<script src="resources/js/chat.js"></script>
+<script src="${resource}/js/chat.js"></script>
