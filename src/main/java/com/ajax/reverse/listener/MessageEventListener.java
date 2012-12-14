@@ -34,18 +34,42 @@ public class MessageEventListener implements ApplicationListener<MessageEvent> {
     public void onApplicationEvent(MessageEvent event) {
         ScriptBuffer scriptBuffer = new ScriptBuffer();
         WebContext webContext = WebContextFactory.get();
-        if (webContext != null) {
-            String currentPage = webContext.getCurrentPage();
-            saveMessageToDatabase(event.getMessage(), currentPage.substring(currentPage.lastIndexOf("/") + 1));
-            sessionsByPage = webContext.getScriptSessionsByPage(currentPage);
-        }
+        String currentPage = registerScriptSession(webContext);
+        saveMessage(event, currentPage);
+        addJavaScriptAction(event, scriptBuffer);
+        broadcastMessage(scriptBuffer);
+    }
+
+    private void addJavaScriptAction(MessageEvent event, ScriptBuffer scriptBuffer) {
         scriptBuffer.appendCall("showMessage", htmlEscape(event.getFrom()), htmlEscape(event.getTextMessage()), htmlEscape(event.getDate()),
                 htmlEscape(String.valueOf(event.getMessage().getObjectId())));
-        broadcastMessage(scriptBuffer);
+    }
+
+    private void saveMessage(MessageEvent event, String currentPage) {
+        if (currentPage != null) {
+            saveMessageToDatabase(event.getMessage(), currentPage.substring(currentPage.lastIndexOf("/") + 1));
+        } else if (event.getMessage().getChannel() != null) {
+            saveMessageToDatabase(event.getMessage());
+        }
+    }
+
+    private String registerScriptSession(WebContext webContext) {
+        String currentPage = null;
+        if (webContext != null) {
+            currentPage = webContext.getCurrentPage();
+            sessionsByPage = webContext.getScriptSessionsByPage(currentPage);
+        }
+        return currentPage;
     }
 
     private String htmlEscape(String string) {
         return HtmlUtils.htmlEscape(string);
+    }
+
+    private void saveMessageToDatabase(Message message) {
+        if (message instanceof ChannelMessage) {
+            messageService.save(message);
+        }
     }
 
     private void saveMessageToDatabase(Message message, String channel) {
