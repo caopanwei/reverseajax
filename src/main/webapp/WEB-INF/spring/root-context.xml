@@ -18,7 +18,7 @@
 		p:serviceInterface="com.ajax.reverse.jaxws.MessageWebServiceInterface"
 		p:wsdlDocumentUrl="http://localhost:8080/reverse/ws?wsdl"
 		p:endpointAddress="http://localhost:8080/reverse/ws"
-		p:lookupServiceOnStartup="false" p:portName="messageWebServicePort"
+		p:lookupServiceOnStartup="false" p:portName="MessageWebServicePort"
 		p:serviceName="MessageWebServiceService" p:namespaceUri="http://jaxws.reverse.ajax.com/">
 	</bean>
 

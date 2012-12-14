@@ -4,7 +4,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-@WebService(name = "messageWebService")
+@WebService
 public interface MessageWebServiceInterface {
 
     @WebMethod(operationName = "sendMessageToChannel")

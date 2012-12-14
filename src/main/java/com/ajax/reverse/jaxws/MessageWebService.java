@@ -13,9 +13,9 @@ import com.ajax.reverse.domain.Message;
 import com.ajax.reverse.service.ChannelService;
 import com.ajax.reverse.service.MessageService;
 
-@WebService(name = "messageWebService")
 @Component
-public class MessageWebService {
+@WebService
+public class MessageWebService implements MessageWebServiceInterface {
 
     @Autowired
     private MessageService messageService;
