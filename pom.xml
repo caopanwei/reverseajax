@@ -50,6 +50,11 @@
 			<artifactId>jaxws-rt</artifactId>
 			<version>2.2.3</version>
 		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
 		<!-- Library from java.net, integrate Spring with JAX-WS -->
 		<dependency>
 			<groupId>org.jvnet.jax-ws-commons.spring</groupId>

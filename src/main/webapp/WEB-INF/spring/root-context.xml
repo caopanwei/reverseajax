@@ -13,6 +13,24 @@
         http://jax-ws.dev.java.net/spring/servlet
         http://jax-ws.dev.java.net/spring/servlet.xsd">
 
+	<bean id="wsClient"
+		class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean"
+		p:serviceInterface="com.ajax.reverse.jaxws.MessageWebServiceInterface"
+		p:wsdlDocumentUrl="http://localhost:8080/reverse/ws?wsdl"
+		p:endpointAddress="http://localhost:8080/reverse/ws"
+		p:lookupServiceOnStartup="false" p:portName="messageWebServicePort"
+		p:serviceName="MessageWebServiceService" p:namespaceUri="http://jaxws.reverse.ajax.com/">
+	</bean>
+
+	<!-- simpler way to do the same as above -->
+	<!-- <bean id="wsClient" class="com.ajax.reverse.jaxws.SimpleJaxWsFactory"> -->
+	<!-- <property name="serviceInterface" value="com.ajax.reverse.jaxws.MessageWebServiceInterface" 
+		/> -->
+	<!-- <property name="localWsdlName" value="/ws?wsdl ???" /> -->
+	<!-- <property name="endpointAddress" -->
+	<!-- value="http://localhost:8080/reverse/ws" /> -->
+	<!-- </bean> -->
+
 	<wss:binding url="/ws">
 		<wss:service>
 			<ws:service bean="#messageWebService" />
