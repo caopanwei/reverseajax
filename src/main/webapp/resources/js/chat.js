@@ -13,7 +13,7 @@ function drop(ev) {
 }
 
 $j(function () {
-    dwr.engine.setActiveReverseAjax(true);
+	dwr.engine.setActiveReverseAjax(true);
     $j("#messageForm").submit(function () {
         DwrService.sendMessage($j("#nick").val(), $j("#messageInput").val());
         $j("#messageInput").val("");

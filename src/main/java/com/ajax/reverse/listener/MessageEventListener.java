@@ -32,20 +32,16 @@ public class MessageEventListener implements ApplicationListener<MessageEvent> {
 
     @Trace
     public void onApplicationEvent(MessageEvent event) {
-        WebContext webContext = WebContextFactory.get();
         ScriptBuffer scriptBuffer = new ScriptBuffer();
+        WebContext webContext = WebContextFactory.get();
         if (webContext != null) {
             String currentPage = webContext.getCurrentPage();
-            if (event.getMessage() instanceof ChannelMessage) {
-                saveMessageToDatabase(event.getMessage(), currentPage.substring(currentPage.lastIndexOf("/") + 1));
-            }
+            saveMessageToDatabase(event.getMessage(), currentPage.substring(currentPage.lastIndexOf("/") + 1));
             sessionsByPage = webContext.getScriptSessionsByPage(currentPage);
-            scriptBuffer.appendCall("showMessage", htmlEscape(event.getFrom()), htmlEscape(event.getTextMessage()), htmlEscape(event.getDate()),
-                    htmlEscape(String.valueOf(event.getMessage().getObjectId())));
-            broadcastMessage(scriptBuffer);
-        } else {
-            broadcastMessage(scriptBuffer);
         }
+        scriptBuffer.appendCall("showMessage", htmlEscape(event.getFrom()), htmlEscape(event.getTextMessage()), htmlEscape(event.getDate()),
+                htmlEscape(String.valueOf(event.getMessage().getObjectId())));
+        broadcastMessage(scriptBuffer);
     }
 
     private String htmlEscape(String string) {
@@ -53,10 +49,12 @@ public class MessageEventListener implements ApplicationListener<MessageEvent> {
     }
 
     private void saveMessageToDatabase(Message message, String channel) {
-        Channel channel2 = channelService.findByName(channel);
-        if (channel2 != null) {
-            message.setChannel(channel2);
-            messageService.save(message);
+        if (message instanceof ChannelMessage) {
+            Channel channel2 = channelService.findByName(channel);
+            if (channel2 != null) {
+                message.setChannel(channel2);
+                messageService.save(message);
+            }
         }
     }
 

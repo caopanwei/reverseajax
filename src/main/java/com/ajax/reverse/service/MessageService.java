@@ -29,6 +29,10 @@ public class MessageService implements ApplicationEventPublisherAware {
         publishEvent(new MessageEvent(this, new ChannelMessage(from, message)));
     }
 
+    public void sendMessage(Message message) {
+        publishEvent(new MessageEvent(this, message));
+    }
+
     public void sendTemporaryMessage(String from, String message) {
         publishEvent(new MessageEvent(this, new ChannelTemporaryMessage(from, message)));
     }
