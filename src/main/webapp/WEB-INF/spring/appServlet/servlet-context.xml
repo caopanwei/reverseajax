@@ -1,86 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
-	xsi:schemaLocation="http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd
-        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-        http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd">
-
-	<!-- DispatcherServlet Context: defines this servlet's request-processing 
-		infrastructure -->
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
+	<context:component-scan base-package="com.ajax.**" />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	<beans:bean
-		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<beans:property name="order" value="0" />
-		<beans:property name="mediaTypes">
-			<beans:map>
-				<beans:entry key="rss" value="application/rss+xml" />
-				<beans:entry key="json" value="application/json" />
-				<beans:entry key="atom" value="application/atom+xml" />
-				<beans:entry key="pdf" value="application/pdf" />
-				<beans:entry key="xls" value="application/vnd.ms-excel" />
-			</beans:map>
-		</beans:property>
-		<beans:property name="defaultViews">
-			<beans:list>
-				<!-- RSS View -->
-				<beans:bean class="com.ajax.reverse.rss.SimpleRss" />
-				<beans:bean class="com.ajax.reverse.rss.AtomRss" />
-				<!-- JSON View -->
-				<beans:bean
-					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
-				<!-- Jasper View -->
-				<beans:bean class="com.ajax.reverse.jasper.JasperReport"
-					p:url="classpath:report2.jrxml" />
-				<beans:bean class="com.ajax.reverse.jasper.JasperXlsReport"
-					p:url="classpath:report2.jrxml" />
-			</beans:list>
-		</beans:property>
-		<beans:property name="ignoreAcceptHeader" value="true" />
-	</beans:bean>
+	<beans:import resource="viewresolvers.xml" />
 
-	<!-- Map returned view name "rssViewer" to bean id "rssViewer" -->
-	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
-		p:order="1" />
+	<beans:import resource="interceptors.xml" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
-		in the /WEB-INF/views directory -->
-	<beans:bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:order="2">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean>
+	<beans:import resource="cache.xml" />
 
-	<interceptors>
-		<beans:bean
-			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
-			p:paramName="language" />
-		<beans:bean
-			class="org.springframework.web.servlet.theme.ThemeChangeInterceptor"
-			p:paramName="theme" />
-		<beans:bean class="com.ajax.reverse.interceptor.ChannalNameInterceptor" />
-		<beans:bean class="com.ajax.reverse.interceptor.TimeInterceptor" />
-	</interceptors>
-
-	<beans:bean id="localeResolver"
-		class="org.springframework.web.servlet.i18n.SessionLocaleResolver"
-		p:defaultLocale="en" />
-
-	<beans:bean id="themeResolver"
-		class="org.springframework.web.servlet.theme.SessionThemeResolver"
-		p:defaultThemeName="orange" />
+	<beans:import resource="exceptions.xml" />
 
 	<beans:bean
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -89,24 +29,6 @@
 				<beans:prop key="/*">pageNotFoundHandler</beans:prop>
 			</beans:props>
 		</beans:property>
-	</beans:bean>
-
-	<beans:bean id="exceptionHandler"
-		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		<beans:property name="exceptionMappings">
-			<beans:map>
-				<beans:entry key="java.lang.NullPointerException" value="npe" />
-			</beans:map>
-		</beans:property>
-	</beans:bean>
-
-	<context:component-scan base-package="com.ajax.**" />
-
-	<ehcache:annotation-driven />
-	<ehcache:config />
-	<beans:bean id="cacheManager"
-		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-		<beans:property name="configLocation" value="/WEB-INF/spring/ehcache.xml" />
 	</beans:bean>
 
 </beans:beans>
