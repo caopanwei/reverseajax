@@ -4,6 +4,7 @@ import java.net.UnknownHostException;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 
 import org.springframework.data.mongodb.core.MongoTemplate;
 
@@ -17,6 +18,7 @@ import com.mongodb.Mongo;
  * Application Lifecycle Listener implementation class InitializerListener
  *
  */
+@WebListener
 public class InitializerListener implements ServletContextListener {
 
     public void contextInitialized(ServletContextEvent servletContextEvent) {
