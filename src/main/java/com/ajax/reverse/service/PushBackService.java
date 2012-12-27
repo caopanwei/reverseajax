@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.directwebremoting.ScriptSession;
-import org.directwebremoting.WebContext;
 import org.directwebremoting.WebContextFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
@@ -26,8 +25,7 @@ public class PushBackService {
 	}
 
 	public void notifyTheBrowsers(ApplicationEvent event) {
-		WebContext webContext = WebContextFactory.get();
-		registerScriptSession(webContext);
+		registerScriptSession();
 		applyStrategies(event);
 	}
 
@@ -39,8 +37,8 @@ public class PushBackService {
 		}
 	}
 
-	private void registerScriptSession(WebContext webContext) {
-		sessions = webContext.getAllScriptSessions();
+	private void registerScriptSession() {
+		sessions = WebContextFactory.get().getAllScriptSessions();
 	}
 
 }

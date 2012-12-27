@@ -14,7 +14,7 @@ public class MessageStrategy implements PushBackStrategy {
 	@Override
 	public void push(ApplicationEvent event, ScriptSession session) {
 		String currentPage = session.getPage();
-		if (!currentPage.equalsIgnoreCase("/reverse/")) {
+		if (currentPage.lastIndexOf("/") != currentPage.length() - 1) {
 			MessageEvent messageEvent = (MessageEvent) event;
 			ScriptBuffer scriptBuffer = new ScriptBuffer();
 			scriptBuffer.appendCall("showMessage", htmlEscape(messageEvent
@@ -23,7 +23,6 @@ public class MessageStrategy implements PushBackStrategy {
 							.valueOf(messageEvent.getMessage().getObjectId())));
 			session.addScript(scriptBuffer);
 		}
-
 	}
 
 	private String htmlEscape(String string) {
