@@ -79,4 +79,10 @@
 	</div>
 </div>
 
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script>
+    $j = jQuery.noConflict();
+</script>
+<script src="<c:url value=" dwr/engine.js "/>"></script>
+<script src="<c:url value=" dwr/util.js "/>"></script>
 <script src="${resource}/js/home.js"></script>

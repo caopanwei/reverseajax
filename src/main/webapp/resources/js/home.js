@@ -1,3 +1,11 @@
+$j(function () {
+	dwr.engine.setActiveReverseAjax(true);
+});
+
 function sendJaxForm(){
-	$("#jax_form").submit();
+	$j("#jax_form").submit();
+}
+
+function showNotification(channalName){
+	console.log(channalName);
 }
