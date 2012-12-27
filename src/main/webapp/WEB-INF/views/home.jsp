@@ -1,6 +1,8 @@
 <%@taglib tagdir="/WEB-INF/tags" prefix="captcha"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
+<link href="${resource}/css/home.css" rel="stylesheet">
+
 <section id="typography" style="text-align: center;">
 	<h1>
 		<spring:message code="create.channel.header" />
@@ -40,7 +42,7 @@
 		<c:forEach var="channel" items="${channelList}">
 			<form method="post" action="<c:url value="/${channel.name}/remove"/>">
 				<a href="<c:url value="/${channel.name}"/>"
-					class="btn btn-large span4">${channel.name}</a>
+					class="btn btn-large span4">${channel.name}<span id="${channel.name}_bubble" class="bubble">0</span></a>
 				<button class="btn btn-danger btn-large" type="submit">
 					<spring:message code="button.text.remove" />
 				</button>

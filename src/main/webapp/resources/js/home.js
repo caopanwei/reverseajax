@@ -1,11 +1,14 @@
-$j(function () {
+$j(function() {
 	dwr.engine.setActiveReverseAjax(true);
 });
 
-function sendJaxForm(){
+function sendJaxForm() {
 	$j("#jax_form").submit();
 }
 
-function showNotification(channalName){
-	console.log(channalName);
+function showNotification(channalName) {
+	var num = parseInt($j("#" + channalName + "_bubble").html());
+	num++;
+	console.log(num);
+	$j("#" + channalName + "_bubble").html(num);
 }
