@@ -20,7 +20,6 @@
 				<bean class="com.ajax.reverse.jasper.JasperXlsReport" p:url="classpath:META-INF/report2.jrxml" />
 			</list>
 		</property>
-		<property name="ignoreAcceptHeader" value="true" />
 	</bean>
 
 	<bean id="contentNegotiationManager"
