@@ -3,6 +3,7 @@ package com.ajax.reverse.service;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import com.ajax.reverse.dao.ChannelRepository;
@@ -37,6 +38,7 @@ public class ChannelService {
     }
 
     @TriggersRemove(cacheName = "channels", removeAll = true)
+    //@CacheEvict(allEntries = true, value = "channels")  -- check the unit tests
     public Channel create(String name) {
         return channelRepository.create(name);
     }

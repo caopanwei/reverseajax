@@ -10,6 +10,7 @@
 
 	<context:component-scan base-package="com.ajax.reverse.dao" />
 	<context:component-scan base-package="com.ajax.reverse.service" />
+	<context:component-scan base-package="com.ajax.reverse.strategy" />
 
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg name="mongo" ref="mongo" />
